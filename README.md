@@ -23,7 +23,26 @@ My app is built upon this [tutorial](https://www.youtube.com/watch?v=2FigkAlz1Bg
 When the app is first launched, there will be a screen with the title "Main App", along with two setting variables. Click on the little gear icon in the bottom right of the app to open up the settings page as a popover. From there, tap on a setting to see what it does. Most of them just show a placeholder alert, but if this was in your app, you could have it do whatever you want. Check out the implementation below for more details. Some of the cells do have proper functionality. For example, when you switch airplane mode off or on, the main app will update accordingly with the boolean value of whether or not it is on. Additionally, you can input a Wi-Fi network, and the text will update in the main app as well. Don't worry, this will not actually enable airplane mode or change the Wi-Fi network on your device; these are just examples to show you how the app could be used. Under the "About" section, clicking on `Information` will bring up a page of lipsum text, as mentioned in the improvements above. Clicking on `Credits` will bring up a submenu that can be fully customized, with many of the same options as the main settings table. Within either of these submenus, a back button will automatically appear. To fully exit the popover, simply swipe down from the top to dismiss it.
 
 ## Implementation
-Coming soon!
+Copy all the `.swift` files from this project into the one for your app, except for the `ViewController`. This is because you should already have this file in your app. If you are starting from scratch, it might be easier to just work off this project instead. Setting that aside, inside `Main.storyboard` of your app, add another view controller and under editor, embed it in a navigation controller. Create a segue from your main view controller to this new one with the identifier `toSettings` and set the kind to be a popover. Add a settings button to your main view controller, and hook it up to an `IBAction` such that when it is pressed, it performs the aforementioned segue. Inside your main view controller swift code, make sure to add the `SettingsDelegate` and the following code.
+
+```swift
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // Check if the correct segue is being performed
+    if segue.identifier == "toSettings" {
+        if let navigationController = segue.destination as? UINavigationController {
+            if let settingsVC = navigationController.topViewController as? SettingsViewController {
+                // Set the delegate of the settings view controller
+                settingsVC.delegate = self
+            }
+        }
+    }
+}
+```
+
+Within `Settings.swift`, under the `SettingsDelegate` protocol, add anything you want to be transferred to your main view controller, and update the variables that hold the state of different settings. Additionally, make sure that in the code snippet above, you actually send back the most up-to-date values so the settings page is accurate. Lastly, customize all the settings within `Configuration.swift` to your liking. 
+
+#### Note
+I know this is a little bit complicated, so feel free to contact me or open up a new issue, or mess around with this code until it makes sense. I have tried to make sure the code is well commented and is modular. Some of this might make a little more sense if you watch iOS Academy's [video](https://www.youtube.com/watch?v=2FigkAlz1Bg) as well.
 
 ## Installation
 1. Clone this repository or download it as a zip folder and uncompress it.
