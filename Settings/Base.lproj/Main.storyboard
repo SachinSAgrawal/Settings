@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QLN-d6-qqm">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="sle-ig-vAs">
+            <objects>
+                <viewController title="Pick'n'Place Controller" id="QLN-d6-qqm" userLabel="Main View Controller" customClass="MainViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yh1-Da-HWj">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsW-f1-0gE">
+                                <rect key="frame" x="305" y="752" width="72" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="6TM-i4-TUC"/>
+                                    <constraint firstAttribute="height" constant="50" id="cvr-Z8-Dxb"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" buttonSize="large">
+                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="settingsPressed:" destination="QLN-d6-qqm" eventType="touchUpInside" id="gdi-0T-fNS"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ejm-3U-YKT">
+                                <rect key="frame" x="32" y="375.33333333333331" width="329" height="101.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ouq-aL-8A0" userLabel="Main App">
+                                        <rect key="frame" x="0.0" y="0.0" width="329" height="28.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi: 127.0.0.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H27-ee-mvo" userLabel="Wi-Fi">
+                                        <rect key="frame" x="0.0" y="44.666666666666686" width="329" height="19.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airplane Mode: true" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9m0-eF-Dyf" userLabel="Airplane Mode">
+                                        <rect key="frame" x="0.0" y="80" width="329" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JpC-3D-aAd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JpC-3D-aAd" firstAttribute="trailing" secondItem="ejm-3U-YKT" secondAttribute="trailing" constant="32" id="3h5-b1-eCh"/>
+                            <constraint firstItem="ejm-3U-YKT" firstAttribute="centerX" secondItem="yh1-Da-HWj" secondAttribute="centerX" id="IXi-k6-exe"/>
+                            <constraint firstItem="JpC-3D-aAd" firstAttribute="trailing" secondItem="HsW-f1-0gE" secondAttribute="trailing" constant="16" id="JIN-8u-DID"/>
+                            <constraint firstItem="ejm-3U-YKT" firstAttribute="leading" secondItem="JpC-3D-aAd" secondAttribute="leading" constant="32" id="Ttf-jG-mGl"/>
+                            <constraint firstItem="ejm-3U-YKT" firstAttribute="centerY" secondItem="yh1-Da-HWj" secondAttribute="centerY" id="Wqo-Go-RiK"/>
+                            <constraint firstItem="HsW-f1-0gE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JpC-3D-aAd" secondAttribute="leading" symbolic="YES" id="dVJ-gT-o5Z"/>
+                            <constraint firstItem="JpC-3D-aAd" firstAttribute="bottom" secondItem="HsW-f1-0gE" secondAttribute="bottom" constant="16" id="jNR-P1-Hvc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="JKJ-WH-kQK"/>
+                    <connections>
+                        <outlet property="airplaneMode" destination="9m0-eF-Dyf" id="UgE-Bs-qnn"/>
+                        <outlet property="settingsButton" destination="HsW-f1-0gE" id="Eem-k5-oHE"/>
+                        <outlet property="wifiLabel" destination="H27-ee-mvo" id="537-4K-buO"/>
+                        <segue destination="bke-7K-j4k" kind="popoverPresentation" identifier="toSettings" popoverAnchorView="yh1-Da-HWj" id="aPK-y5-CYu">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TFf-bW-GUD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-821" y="-27"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SettingsViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NvZ-ar-fDl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057.2519083969464" y="-27.464788732394368"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n28-9N-dy9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bke-7K-j4k" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="3JO-qq-1Ph"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="5xF-r6-kbs">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="BNJ-Sh-V11"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q4u-9Y-vhi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
