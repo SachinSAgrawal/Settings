@@ -96,24 +96,34 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.frame = view.bounds
+        
+        // Use Auto Layout to ensure the table view fits within the safe area
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
         
         // Add a footer view to the table with the commit hash
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
+        let footerView = UIView()
         let commitHashLabel = UILabel()
-        
         let commitHash = Bundle.main.commitHash ?? "Undefined"
         
         // Configure the label containing the commit hash
         commitHashLabel.text = "Hash: \(commitHash)"
         commitHashLabel.textAlignment = .center
-        commitHashLabel.font = UIFont.systemFont(ofSize: 12)
+        commitHashLabel.font = UIFont.systemFont(ofSize: 10)
         commitHashLabel.textColor = .lightGray
-        
-        let padding: CGFloat = 50
-        commitHashLabel.frame = CGRect(x: 0, y: -25, width: footerView.frame.width, height: footerView.frame.height - padding)
+        commitHashLabel.translatesAutoresizingMaskIntoConstraints = false
         
         footerView.addSubview(commitHashLabel)
+        
+        NSLayoutConstraint.activate([
+            commitHashLabel.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
+            commitHashLabel.centerYAnchor.constraint(equalTo: footerView.centerYAnchor, constant: -8),
+        ])
         
         tableView.tableFooterView = footerView
     }

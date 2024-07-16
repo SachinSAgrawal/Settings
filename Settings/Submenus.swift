@@ -37,18 +37,35 @@ class SubmenuViewController: UIViewController, UITableViewDelegate, UITableViewD
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.frame = view.bounds
+        
+        // Use Auto Layout to ensure the table view fits within the safe area
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
     
     // Set up a text view for displaying static text
     func setupStaticTextView(_ text: String) {
-        let textView = UITextView(frame: view.bounds)
+        let textView = UITextView()
         textView.text = text
         textView.font = .systemFont(ofSize: 16)
         textView.isEditable = false
         textView.backgroundColor = .systemBackground
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: 16, bottom: 72, right: 16)
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 12, bottom: 12, right: 12)
         view.addSubview(textView)
+        
+        // Use Auto Layout to ensure the table view fits within the safe area
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
 
     // Return the number of sections in the table view

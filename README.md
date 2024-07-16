@@ -69,6 +69,7 @@ If you find any, feel free to open up a new issue or even better, create a pull 
 
 #### Resolved
 - [x] There is no Bluetooth SF symbol. Fixed by using a custom one.
+- [x] App may crash when trying to display the popover on an iPad.
 
 ## Contributors
 Sachin Agrawal: I'm a self-taught programmer who knows many languages and I'm into app, game, and web development. For more information, check out my website or Github profile. If you would like to contact me, my email is [github@sachin.email](mailto:github@sachin.email).

@@ -73,8 +73,11 @@
                         <outlet property="airplaneMode" destination="9m0-eF-Dyf" id="UgE-Bs-qnn"/>
                         <outlet property="settingsButton" destination="HsW-f1-0gE" id="Eem-k5-oHE"/>
                         <outlet property="wifiLabel" destination="H27-ee-mvo" id="537-4K-buO"/>
-                        <segue destination="bke-7K-j4k" kind="popoverPresentation" identifier="toSettings" popoverAnchorView="yh1-Da-HWj" id="aPK-y5-CYu">
+                        <segue destination="bke-7K-j4k" kind="popoverPresentation" identifier="toSettings" popoverAnchorView="HsW-f1-0gE" id="aPK-y5-CYu">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                            <popoverPassthroughViews>
+                                <view reference="yh1-Da-HWj"/>
+                            </popoverPassthroughViews>
                         </segue>
                     </connections>
                 </viewController>
