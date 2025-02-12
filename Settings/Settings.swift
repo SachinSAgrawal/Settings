@@ -42,6 +42,7 @@ struct SettingsOption {
     let handler: (() -> Void)?
     let submenuSections: [SubmenuSection]?
     let staticText: String?
+    var isLarge: Bool
 }
 
 // Define a struct for submenu sections
@@ -97,6 +98,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Add a back button to go back to the main app
+        let backbutton = UIButton(type: .custom)
+        backbutton.setTitle("Close", for: .normal)
+        backbutton.setTitleColor(backbutton.tintColor, for: .normal)
+        backbutton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
+        
         // Use Auto Layout to ensure the table view fits within the safe area
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -128,6 +137,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.tableFooterView = footerView
     }
     
+    // Go to the previous view controller when the button is pressed
+    @objc func backButtonPressed() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // Return the header title for each section
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return models[section].title
@@ -136,6 +150,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // Return the footer text for each section
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return models[section].footer
+    }
+    
+    // Adjust the height of the table as needed
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = models[indexPath.section].options[indexPath.row]
+
+        switch model {
+        case .staticCell(let model):
+            return model.isLarge ? 80 : 50
+        case .switchCell:
+            return 50
+        }
     }
     
     // Return the number of sections in the table view

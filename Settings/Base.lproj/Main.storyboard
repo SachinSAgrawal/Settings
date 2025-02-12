@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QLN-d6-qqm">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QLN-d6-qqm">
+    <device id="retina6_3" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController title="Pick'n'Place Controller" id="QLN-d6-qqm" userLabel="Main View Controller" customClass="MainViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yh1-Da-HWj">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsW-f1-0gE">
-                                <rect key="frame" x="305" y="752" width="72" height="50"/>
+                                <rect key="frame" x="314" y="774" width="72" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="6TM-i4-TUC"/>
                                     <constraint firstAttribute="height" constant="50" id="cvr-Z8-Dxb"/>
@@ -33,22 +33,22 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ejm-3U-YKT">
-                                <rect key="frame" x="32" y="375.33333333333331" width="329" height="101.66666666666669"/>
+                                <rect key="frame" x="32" y="386.33333333333331" width="338" height="101.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ouq-aL-8A0" userLabel="Main App">
-                                        <rect key="frame" x="0.0" y="0.0" width="329" height="28.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="28.666666666666668"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi: 127.0.0.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H27-ee-mvo" userLabel="Wi-Fi">
-                                        <rect key="frame" x="0.0" y="44.666666666666686" width="329" height="19.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="44.666666666666686" width="338" height="19.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airplane Mode: true" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9m0-eF-Dyf" userLabel="Airplane Mode">
-                                        <rect key="frame" x="0.0" y="80" width="329" height="21.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="80" width="338" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -73,12 +73,7 @@
                         <outlet property="airplaneMode" destination="9m0-eF-Dyf" id="UgE-Bs-qnn"/>
                         <outlet property="settingsButton" destination="HsW-f1-0gE" id="Eem-k5-oHE"/>
                         <outlet property="wifiLabel" destination="H27-ee-mvo" id="537-4K-buO"/>
-                        <segue destination="bke-7K-j4k" kind="popoverPresentation" identifier="toSettings" popoverAnchorView="HsW-f1-0gE" id="aPK-y5-CYu">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                            <popoverPassthroughViews>
-                                <view reference="yh1-Da-HWj"/>
-                            </popoverPassthroughViews>
-                        </segue>
+                        <segue destination="bke-7K-j4k" kind="presentation" identifier="toSettings" id="aPK-y5-CYu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TFf-bW-GUD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -90,7 +85,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SettingsViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="864"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -108,7 +103,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="3JO-qq-1Ph"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="5xF-r6-kbs">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="108"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="109"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

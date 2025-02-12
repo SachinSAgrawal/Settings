@@ -24,14 +24,24 @@ class MainViewController: UIViewController, SettingsDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Check if the correct segue is being performed
         if segue.identifier == "toSettings" {
-            if let navigationController = segue.destination as? UINavigationController {
-                if let settingsVC = navigationController.topViewController as? SettingsViewController {
-                    // Set the delegate of the settings view controller
-                    settingsVC.delegate = self
-                    
-                    // Send the most updated values to settings so the toggle states are accurate
-                    settingsVC.isAirplaneModeOn = (airplaneMode.text == "Airplane Mode: true")
-                }
+            if let navigationController = segue.destination as? UINavigationController,
+               let settingsVC = navigationController.topViewController as? SettingsViewController {
+                
+                // Set the delegate of the settings view controller
+                settingsVC.delegate = self
+                
+                // Send the most updated values to settings so the toggle states are accurate
+                settingsVC.isAirplaneModeOn = (airplaneMode.text == "Airplane Mode: true")
+            }
+            
+            // Set presentation style before the segue executes
+            let destination = segue.destination
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                destination.modalPresentationStyle = .pageSheet
+                destination.modalTransitionStyle = .coverVertical
+            } else {
+                destination.modalPresentationStyle = .fullScreen
+                destination.modalTransitionStyle = .coverVertical
             }
         }
     }

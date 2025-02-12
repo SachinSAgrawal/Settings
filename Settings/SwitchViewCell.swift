@@ -33,6 +33,7 @@ class SwitchViewCell: UITableViewCell {
     private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
@@ -112,7 +113,15 @@ class SwitchViewCell: UITableViewCell {
     public func configure(with model: SettingsSwitchOption) {
         label.text = model.title
         iconImageView.image = model.icon
-        iconContainer.backgroundColor = model.iconBackgroundColor
+        
+        if traitCollection.userInterfaceStyle == .dark {
+            iconContainer.backgroundColor = .systemBackground
+            iconImageView.tintColor = model.iconBackgroundColor
+        } else {
+            iconContainer.backgroundColor = model.iconBackgroundColor
+            iconImageView.tintColor = .white
+        }
+        
         mySwitch.isOn = model.isOn
         mySwitch.isEnabled = model.isEnabled
         switchHandler = model.handler

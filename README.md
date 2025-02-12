@@ -20,20 +20,46 @@ My app is built upon this [tutorial](https://www.youtube.com/watch?v=2FigkAlz1Bg
 * The most recent commit hash is displayed at the bottom of the settings page.
 
 ## Usage
-When the app is first launched, there will be a screen with the title "Main App", along with two setting variables. Click on the little gear icon in the bottom right of the app to open up the settings page as a popover. From there, tap on a setting to see what it does. Most of them just show a placeholder alert, but if this was in your app, you could have it do whatever you want. Check out the implementation below for more details. Some of the cells do have proper functionality. For example, when you switch airplane mode off or on, the main app will update accordingly with the boolean value of whether or not it is on. Additionally, you can input a Wi-Fi network, and the text will update in the main app as well. Don't worry, this will not actually enable airplane mode or change the Wi-Fi network on your device; these are just examples to show you how the app could be used. Under the "About" section, clicking on `Information` will bring up a page of lipsum text, as mentioned in the improvements above. Clicking on `Credits` will bring up a submenu that can be fully customized, with many of the same options as the main settings table. Within either of these submenus, a back button will automatically appear. To fully exit the popover, simply swipe down from the top to dismiss it.
+When the app is first launched, there will be a screen with the title "Main App", along with two setting variables. Click on the little gear icon in the bottom right of the app to open up the settings page. From there, tap on a setting to see what it does. Most of them just show a placeholder alert, but if this was in your app, you could have it do whatever you want. Check out the implementation section below for more details on how to do that. Some of the cells do have proper functionality. For example, when you switch airplane mode off or on, the main app will update accordingly with the boolean value of whether or not it is on. Additionally, you can input a Wi-Fi network, and the text will update in the main app as well. Don't worry, this will not actually enable airplane mode or change the Wi-Fi network on your device; these are just examples to show you how the app could be used. Under the "About" section, clicking on `Information` will bring up a page of lipsum text, as mentioned in the improvements above. Clicking on `Credits` will bring up a submenu that can be fully customized, with many of the same options as the main settings table. Within either of these submenus, a back button will automatically appear. To exit the settings page, simply hit the `Close` button or swipe down from the top to dismiss it.
 
 ## Implementation
-Copy all the `.swift` files from this project into the one for your app, except for the `ViewController`. This is because you should already have this file in your app. If you are starting from scratch, it might be easier to just work off this project instead. Setting that aside, inside `Main.storyboard` of your app, add another view controller and under editor, embed it in a navigation controller. Create a segue from your main view controller to this new one with the identifier `toSettings` and set the kind to be a popover. Add a settings button to your main view controller, and hook it up to an `IBAction` such that when it is pressed, it performs the aforementioned segue. Inside your main view controller swift code, make sure to add the `SettingsDelegate` and the following code.
+If you are starting to build your app from scratch, it might be easier to just work off this project. If not, then copy all the `.swift` files from this project into the one for your app, except for the `ViewController`. This is because you should already have this file in your app. Inside `Main.storyboard` of your app, add a settings button to the main view controller. Then add another view controller and under editor, embed it in a navigation controller, which will be your settings page. Create a segue from your main view controller to this new one with the identifier `toSettings`. If you want the functionality to mirror this sample app, then set the segue kind to be `Present Modally` with the presentation and transition being `Same As Destination`. If you want to segue to be a popover, then set the segue kind to be `Present as Popover`, set the settings button as the anchor, and set the passthrough as the view controller where the button is. Regardless of the segue kind, hook that button up to an `IBAction` such that when it is pressed, it performs the aforementioned segue. Inside your main view controller swift code, make sure to add the `SettingsDelegate` and the following code.
 
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Check if the correct segue is being performed
     if segue.identifier == "toSettings" {
-        if let navigationController = segue.destination as? UINavigationController {
-            if let settingsVC = navigationController.topViewController as? SettingsViewController {
-                // Set the delegate of the settings view controller
-                settingsVC.delegate = self
-            }
+        if let navigationController = segue.destination as? UINavigationController,
+           let settingsVC = navigationController.topViewController as? SettingsViewController {
+            
+            // Set the delegate of the settings view controller
+            settingsVC.delegate = self
+        }
+        
+        // Set presentation style before the segue executes
+        let destination = segue.destination
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            destination.modalPresentationStyle = .pageSheet
+            destination.modalTransitionStyle = .coverVertical
+        } else {
+            destination.modalPresentationStyle = .fullScreen
+            destination.modalTransitionStyle = .coverVertical
+        }
+    }
+}
+```
+
+If the settings page is a popover, then add the following code instead of the one above.
+
+```swift
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // Check if the correct segue is being performed
+    if segue.identifier == "toSettings" {
+        if let navigationController = segue.destination as? UINavigationController,
+           let settingsVC = navigationController.topViewController as? SettingsViewController {
+            
+            // Set the delegate of the settings view controller
+            settingsVC.delegate = self
         }
     }
 }
@@ -43,6 +69,9 @@ Within `Settings.swift`, under the `SettingsDelegate` protocol, add anything you
 
 #### Note
 I know this is a little bit complicated, so feel free to contact me or open up a new issue, or mess around with this code until it makes sense. I have tried to make sure the code is well commented and is modular. Some of this might make a little more sense if you watch iOS Academy's [video](https://www.youtube.com/watch?v=2FigkAlz1Bg) as well.
+
+## Update
+I know that I said I would not work on this much more, however, after Apple released iOS 18 with its revamped settings app, I knew that I had to update this one to match fully. Now, the icons adapt to both light and dark mode. Additionally, I added special handling for some icons, such as those involving pictures rather than SF symbols or those with color gradients. 
 
 ## Installation
 1. Clone this repository or download it as a zip folder and uncompress it.
@@ -65,7 +94,10 @@ The device must be either an iPhone or iPad running iOS 17.0 or newer.
 If you find any, feel free to open up a new issue or even better, create a pull request fixing it.
 
 #### Known
-- [ ] Toggles may reset themselves when scrolling all the way down within the popover.
+- [ ] Toggles may reset themselves when scrolling within the settings page.
+- [ ] Some icons may not render correctly within the settings page.
+- [ ] The Apple Intelligence & Siri section icon might not render correctly.
+- [ ] All icons might not switch between light and dark mode immediately.
 
 #### Resolved
 - [x] There is no Bluetooth SF symbol. Fixed by using a custom one.

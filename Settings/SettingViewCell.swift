@@ -58,8 +58,13 @@ class SettingViewCell: UITableViewCell {
         super.layoutSubviews()
         
         // Size and position of icon container
+        let isLarge = (label.font == UIFont.boldSystemFont(ofSize: 20))
         let size: CGFloat = contentView.frame.size.height - 20
         iconContainer.frame = CGRect(x: 15, y: 10, width: size, height: size)
+        
+        if isLarge {
+            iconContainer.layer.cornerRadius = size / 2
+        }
         
         // Size and position of icon image view
         let imageSize: CGFloat = size * 2 / 3
@@ -81,16 +86,83 @@ class SettingViewCell: UITableViewCell {
         label.text = nil
         iconImageView.image = nil
         iconContainer.backgroundColor = nil
+        iconContainer.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
         accessoryType = .disclosureIndicator
         detailTextLabel?.text = nil
+        
+        label.font = UIFont.systemFont(ofSize: 16)
     }
     
     // Configure cell with SettingsOption model
     public func configure(with model: SettingsOption) {
         label.text = model.title
         iconImageView.image = model.icon
-        iconContainer.backgroundColor = model.iconBackgroundColor
+        
+        if model.isLarge {
+            label.font = UIFont.boldSystemFont(ofSize: 20)
+        } else {
+            label.font = UIFont.systemFont(ofSize: 16)
+        }
+        
+        // Special logic for the Apple Intelligence section
+        if model.icon == UIImage(systemName: "apple.intelligence") {
+            if traitCollection.userInterfaceStyle == .light {
+                let gradientLayer = CAGradientLayer()
+                gradientLayer.colors = [
+                    UIColor.systemYellow.cgColor,
+                    UIColor.systemPink.cgColor,
+                    UIColor.systemTeal.cgColor,
+                ]
+                gradientLayer.locations = [0.0, 0.5, 0.8]
+                gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+                gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+                gradientLayer.frame = iconContainer.bounds
+                gradientLayer.cornerRadius = iconContainer.layer.cornerRadius
+
+                iconContainer.layer.insertSublayer(gradientLayer, at: 0)
+                iconImageView.tintColor = .white
+            } else {
+                iconContainer.backgroundColor = .systemBackground
+                iconImageView.image = gradientMaskedImage(for: model.icon)
+            }
+        } else {
+            // Handle light and dark mode
+            if traitCollection.userInterfaceStyle == .dark && !model.isLarge {
+                iconContainer.backgroundColor = .systemBackground
+                iconImageView.tintColor = model.iconBackgroundColor
+            } else {
+                iconContainer.backgroundColor = model.iconBackgroundColor
+                iconImageView.tintColor = .white
+            }
+        }
+        
         accessoryType = model.accessory
         detailTextLabel?.text = model.detailText
+    }
+}
+
+// Create a yellow pink blue gradient
+private func gradientMaskedImage(for image: UIImage?) -> UIImage? {
+    guard let image = image else { return nil }
+    
+    let size = image.size
+    let renderer = UIGraphicsImageRenderer(size: size)
+    
+    return renderer.image { context in
+        let gradient = CGGradient(
+            colorsSpace: CGColorSpaceCreateDeviceRGB(),
+            colors: [
+                UIColor.systemYellow.cgColor,
+                UIColor.systemPink.cgColor,
+                UIColor.systemTeal.cgColor,
+                UIColor.systemCyan.cgColor,
+            ] as CFArray,
+            locations: [0.0, 0.5, 0.8, 1.0]
+        )!
+
+        let startPoint = CGPoint(x: 0, y: 0)
+        let endPoint = CGPoint(x: size.width, y: size.height)
+        context.cgContext.clip(to: CGRect(origin: .zero, size: size), mask: image.cgImage!)
+        context.cgContext.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
     }
 }
