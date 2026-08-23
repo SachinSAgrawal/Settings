@@ -70,8 +70,13 @@ Within `Settings.swift`, under the `SettingsDelegate` protocol, add anything you
 #### Note
 I know this is a little bit complicated, so feel free to contact me or open up a new issue, or mess around with this code until it makes sense. I have tried to make sure the code is well commented and is modular. Some of this might make a little more sense if you watch iOS Academy's [video](https://www.youtube.com/watch?v=2FigkAlz1Bg) as well.
 
-## Update
+## Updates
+
+#### First
 I know that I said I would not work on this much more, however, after Apple released iOS 18 with its revamped settings app, I knew that I had to update this one to match fully. Now, the icons adapt to both light and dark mode. Additionally, I added special handling for some icons, such as those involving pictures rather than SF symbols or those with color gradients. 
+
+#### Second
+Apple again changed the settings app with iOS 27, so I decided that I too would update this app to match again. Specifically, some icons have been changed and the layout is accurate. I have also added a working search bar at the bottom and fixed all of the known known bugs regarding the icons rendering and toggles resetting.
 
 ## Installation
 1. Clone this repository or download it as a zip folder and uncompress it.
@@ -93,15 +98,13 @@ The device must be either an iPhone or iPad running iOS 17.0 or newer.
 ## Bugs
 If you find any, feel free to open up a new issue or even better, create a pull request fixing it.
 
-#### Known
-- [ ] Toggles may reset themselves when scrolling within the settings page.
-- [ ] Some icons may not render correctly within the settings page.
-- [ ] The Apple Intelligence & Siri section icon might not render correctly.
-- [ ] All icons might not switch between light and dark mode immediately.
-
 #### Resolved
 - [x] There is no Bluetooth SF symbol. Fixed by using a custom one.
 - [x] App may crash when trying to display the popover on an iPad.
+- [x] Toggles may reset themselves when scrolling within the settings page.
+- [x] Some icons may not render correctly within the settings page.
+- [x] The Apple Intelligence & Siri section icon was outdated.
+- [x] All icons might not switch between light and dark mode immediately.
 
 ## Contributors
 Sachin Agrawal: I'm a self-taught programmer who knows many languages and I'm into app, game, and web development. For more information, check out my website or Github profile. If you would like to contact me, my email is [github@sachin.email](mailto:github@sachin.email).
